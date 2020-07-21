@@ -11,3 +11,12 @@ This package is tested for ROS 1.0 Kinetic Kame using Python 2.7
 * Odom: odom
 * Right cones array: airsim/RightCones
 * Left cones array: airsim/LeftCones
+
+## Python scripts:
+* cones_detector.py: Publishes two PoseArray messages for the right and left cones.
+* delaunay_planner.py: Publishes PoseArray message for the waypoints.
+* gps_publisher.py: Publishes NavSatFix message for GPS.
+* odometry_publisher.py: Publishes Odometry messgae estimated from kinematics.
+* pointcloud_publisher.py: Publishes Imu and PointCloud2 messages for the IMU and lidar.
+* tf_to_odom_publisher.py: Publishes Odometry message by listening to the map to odom transform.
+
