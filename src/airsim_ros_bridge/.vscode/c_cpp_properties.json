@@ -1,0 +1,19 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "",
+        "limitSymbolsToIncludedHeaders": true
+      },
+      "includePath": [
+        "/home/michaelhannalla/catkin_ws/devel/include/**",
+        "/home/michaelhannalla/AirSim/ros/devel/include/**",
+        "/opt/ros/kinetic/include/**",
+        "/home/michaelhannalla/catkin_ws/src/airsim_ros_bridge/include/**",
+        "/home/michaelhannalla/AirSim/ros/src/airsim_ros_pkgs/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS"
+    }
+  ]
+}
