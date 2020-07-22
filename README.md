@@ -9,9 +9,9 @@ This package is tested for ROS 1.0 Kinetic Kame using Python 2.7
 * IMU: `/airsim/imu`
 * Lidar: `/airsim/VelodynePoints>`
 * Odom: `/odom`
-* Right Cones Array: `airsim/RightCones`
-* Left Cones Array:  `airsim/LeftCones`
-* Delaunay Planned Path: `airsim/DelaunayPath`
+* Right Cones Array: `/airsim/RightCones`
+* Left Cones Array:  `/airsim/LeftCones`
+* Delaunay Planned Path: `/airsim/DelaunayPath`
 
 ## Python scripts:
 * cones_detector.py: Publishes two **geometry_msgs/PoseArray** messages for the right and left cones.
