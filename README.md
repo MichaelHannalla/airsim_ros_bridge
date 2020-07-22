@@ -5,18 +5,19 @@ This package was initially developed for [ASU Racing Team](https://www.facebook.
 This package is tested for ROS 1.0 Kinetic Kame using Python 2.7
 
 ## Published topics:
-* GPS: airsim/gps/fix
-* IMU: airsim/imu
-* Lidar: airsim/VelodynePoints
-* Odom: odom
-* Right cones array: airsim/RightCones
-* Left cones array: airsim/LeftCones
+* GPS: ''' /airsim/gps/fix '''
+* IMU: ''' /airsim/imu '''
+* Lidar: ''' /airsim/VelodynePoints '''
+* Odom: ''' /odom '''
+* Right Cones Array: ''' airsim/RightCones '''
+* Left Cones Array:  ''' airsim/LeftCones  '''
+* Delaunay Planned Path: ''' airsim/DelaunayPath '''
 
 ## Python scripts:
-* cones_detector.py: Publishes two PoseArray messages for the right and left cones.
-* delaunay_planner.py: Publishes PoseArray message for the waypoints.
-* gps_publisher.py: Publishes NavSatFix message for GPS.
-* odometry_publisher.py: Publishes Odometry messgae estimated from kinematics.
-* pointcloud_publisher.py: Publishes Imu and PointCloud2 messages for the IMU and lidar.
-* tf_to_odom_publisher.py: Publishes Odometry message by listening to the map to odom transform.
+* cones_detector.py: Publishes two **geometry_msgs/PoseArray** messages for the right and left cones.
+* delaunay_planner.py: Publishes **geometry_msgs/PoseArray** message for the waypoints.
+* gps_publisher.py: Publishes **sensor_msgs/NavSatFix** message for GPS.
+* odometry_publisher.py: Publishes **nav_msgs/Odometry** messgae estimated from vehicle kinematics.
+* pointcloud_publisher.py: Publishes **sensor_msgs/Imu** and **sensor_msgs/PointCloud2** messages for the IMU and lidar.
+* tf_to_odom_publisher.py: Publishes **nav_msgs/Odometry** message by listening to the map to odom transform.
 
