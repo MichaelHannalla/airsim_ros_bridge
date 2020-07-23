@@ -7,7 +7,7 @@ This package is tested for ROS 1.0 Kinetic Kame using Python 2.7
 ## Published topics:
 * GPS: `/airsim/gps/fix`
 * IMU: `/airsim/imu`
-* Lidar: `/airsim/VelodynePoints>`
+* Lidar: `/airsim/VelodynePoints`
 * Kinematic Odometry: `/odom`
 * Right Cones Array: `/airsim/RightCones`
 * Left Cones Array:  `/airsim/LeftCones`
