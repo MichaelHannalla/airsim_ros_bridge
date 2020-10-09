@@ -6,7 +6,7 @@ import cv2
 import numpy as np
 import os
 import time
-import open3d as o3d
+#import open3d as o3d
 import matplotlib.pyplot as plt
 
 import scipy

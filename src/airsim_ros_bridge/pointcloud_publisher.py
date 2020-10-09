@@ -11,8 +11,8 @@ from sensor_msgs.msg import Imu
 from sensor_msgs.msg import PointCloud2
 from sensor_msgs.msg import PointField
 
-import open3d as o3d
-pcd = o3d.geometry.PointCloud()
+#import open3d as o3d
+#pcd = o3d.geometry.PointCloud()
 
 client = airsim.CarClient()
 client.confirmConnection()

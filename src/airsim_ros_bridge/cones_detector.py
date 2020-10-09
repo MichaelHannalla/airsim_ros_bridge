@@ -6,7 +6,7 @@ import cv2
 import numpy as np
 import os
 import time
-import open3d as o3d
+#import open3d as o3d
 import matplotlib.pyplot as plt
 
 from scipy import interpolate
@@ -55,7 +55,7 @@ while not rospy.is_shutdown():
   point_data = np.asarray(airsim_lidar.point_cloud, np.float32)
 
   if len(point_data) >= 3:
-    point_data = point_data.reshape(point_data.shape[0]/5,5)
+    point_data = point_data.reshape((int(point_data.shape[0]/5),5))
 
     # Temporary solution of cone detection using lidar pointcloud height thresholding.
     point_data_x = point_data[:,0]
