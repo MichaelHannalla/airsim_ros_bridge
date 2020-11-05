@@ -27,6 +27,7 @@ lidar_pub = rospy.Publisher('airsim/VelodynePoints', PointCloud2, queue_size=10)
 
 #Initializing IMU message
 ros_imu = Imu()
+ros_lidar = None
 r =rospy.Rate(10.0)
 
 try:		

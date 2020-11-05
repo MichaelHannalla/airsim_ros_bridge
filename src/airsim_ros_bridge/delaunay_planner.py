@@ -6,7 +6,7 @@ import cv2
 import numpy as np
 import os
 import time
-import open3d as o3d
+#import open3d as o3d
 import matplotlib.pyplot as plt
 
 import scipy
@@ -27,7 +27,7 @@ ros_path.header.frame_id = "velodyne"
 client = airsim.CarClient()
 client.confirmConnection()
 
-r = rospy.Rate(0.5)
+r = rospy.Rate(1)
 
 # Defining the clustering function.
 def radius_nms_np(boxes,radius):
@@ -99,6 +99,7 @@ while not rospy.is_shutdown():
       arr2 = [arr1[-1], arr1[0], arr1[1]]
       midpoints = np.vstack((midpoints, (arr1 + arr2) / 2))
     midpoints = np.unique(midpoints, axis = 0)
+    #midpoints = midpoints[1:] # removing the zero element
 
     poly_coeff = np.polyfit(center_points[:,0], center_points[:,1], deg=2)
     polyout = np.polyval(poly_coeff,center_points[:,0])

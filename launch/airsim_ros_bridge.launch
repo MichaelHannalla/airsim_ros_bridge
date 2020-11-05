@@ -1,10 +1,12 @@
 <?xml version="1.0"?>
 <launch>
+	<node pkg="tf2_ros" type="static_transform_publisher" name="map_to_odom" args="0 0 0 0 0 0 map odom"/>
 	<node pkg="tf2_ros" type="static_transform_publisher" name="laser_to_base" args="0 0 0 0 0 0 base_link velodyne"/>
+
 	<node name="pointcloud_publisher" pkg="airsim_ros_bridge" type="pointcloud_publisher.py" output="screen"/>
 	<node name="odometry_publisher" pkg="airsim_ros_bridge" type="odometry_publisher.py" output="screen"/>
 	<!-- <node name="delaunay_planner" pkg="airsim_ros_bridge" type="delaunay_planner.py" output="screen"/> -->
-	<node name="delaunay_planner_laps" pkg="airsim_ros_bridge" type="delaunay_planner_laps.py" output="screen"/>
+	<!-- <node name="delaunay_planner_laps" pkg="airsim_ros_bridge" type="delaunay_planner_laps.py" output="screen"/> -->
 	<node name="cones_detector" pkg="airsim_ros_bridge" type="cones_detector.py" output="screen"/>
 	<!-- <node name="tf_to_odom_publisher" pkg="airsim_ros_bridge" type="tf_to_odom_publisher.py" output="screen"/> -->
 	<!-- <node name="vehicle_mover" pkg="airsim_ros_bridge" type="vehicle_mover.py" output="screen"/> -->
