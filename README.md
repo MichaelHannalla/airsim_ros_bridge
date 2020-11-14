@@ -2,7 +2,7 @@
 This is a Python ROS Package for publishing [AirSim Simulator](https://github.com/FSTDriverless/AirSim) (based on Unreal Engine) on ROS as topics, and implementing nodes for different autonomous software stack algorithms.
 
 This package was initially developed for [ASU Racing Team](https://www.facebook.com/ASU.Racing.Team/), Formula Student AI Team for participating in FS-AI 2020 Online Simulation Development Event.
-This package is tested for ROS 1.0 Kinetic Kame using Python 2.7
+This package was originally developed for ROS 1.0 Kinetic Kame using Python 2.7, but now is migrated can work on both ROS 1.0 Kinetic and ROS 1.0 Noetic Ninjemys, also can work with Python 3 interpreters as well.
 
 ## Published topics:
 * GPS: `/airsim/gps/fix`
