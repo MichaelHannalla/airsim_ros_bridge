@@ -50,8 +50,8 @@ while not rospy.is_shutdown():
     zo = -1 * car_state.kinematics_estimated.orientation.z_val
 
     vx = car_state.kinematics_estimated.linear_velocity.x_val
-    vy = -1 * car_state.kinematics_estimated.linear_velocity.y_val
-    vth = car_state.kinematics_estimated.angular_velocity.z_val
+    vy  = -1 * car_state.kinematics_estimated.linear_velocity.y_val
+    vth = -1 * car_state.kinematics_estimated.angular_velocity.z_val
     
     odom_quat = (xo, yo, zo, wo)
     odom_eul  = tf.transformations.euler_from_quaternion(odom_quat)
