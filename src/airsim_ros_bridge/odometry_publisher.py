@@ -72,8 +72,8 @@ while not rospy.is_shutdown():
 
 
     # Local odometry feature
-    transformation_matrix = np.mat([[np.cos(yaw), -1 * np.sin(yaw), x],
-                                    [np.sin(yaw), np.cos(yaw)     , y],
+    transformation_matrix = np.mat([[np.cos(yaw), -1 * np.sin(yaw), 0],
+                                    [np.sin(yaw), np.cos(yaw)     , 0],
                                     [0          , 0               , 1]])
 
     vel_local = np.linalg.inv(transformation_matrix) @ np.mat([[vx],[vy],[1]])
