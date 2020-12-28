@@ -29,7 +29,7 @@ ros_right_cones.header.frame_id = "velodyne"
 ros_left_cones.header.frame_id = "velodyne"
 temp_cone = Pose()
 
-r = rospy.Rate(5)
+r = rospy.Rate(10)
 
 # Defining the clustering function.
 def radius_nms_np(boxes,radius):

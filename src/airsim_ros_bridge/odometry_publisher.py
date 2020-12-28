@@ -32,7 +32,7 @@ odom.header.frame_id = "odom"
 odom.child_frame_id = "base_link"
 
 odom_local = Odometry()
-odom.header.frame_id = "base_link"
+odom_local.header.frame_id = "base_link"
 odom_local.child_frame_id = "base_link"
 
 while not rospy.is_shutdown():
