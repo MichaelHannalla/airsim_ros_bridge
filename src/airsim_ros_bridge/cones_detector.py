@@ -11,23 +11,20 @@ import matplotlib.pyplot as plt
 
 from scipy import interpolate
 
-from geometry_msgs.msg import PoseArray
-from geometry_msgs.msg import Pose
 from geometry_msgs.msg import Point
 from geometry_msgs.msg import Quaternion
+
+from asurt_msgs.msg import Landmark
+from asurt_msgs.msg import LandmarkArray
 
 client = airsim.CarClient()
 client.confirmConnection()
 
 #Initializing ros node and publishers. 
 rospy.init_node('airsim_cones_detector_node')
-right_cones_pub = rospy.Publisher('airsim/RightCones', PoseArray, queue_size=10) 
-left_cones_pub = rospy.Publisher('airsim/LeftCones', PoseArray, queue_size=10)
-ros_right_cones = PoseArray()
-ros_left_cones = PoseArray()
-ros_right_cones.header.frame_id = "velodyne"
-ros_left_cones.header.frame_id = "velodyne"
-temp_cone = Pose()
+cones_pub = rospy.Publisher('airsim/Cones', LandmarkArray, queue_size=10) 
+ros_cones = LandmarkArray()
+ros_cones.header.frame_id = "velodyne"
 
 r = rospy.Rate(10)
 
@@ -99,20 +96,23 @@ while not rospy.is_shutdown():
     right_cones = center_points[right_cones]
     left_cones = (polyout <= center_points[:,1])
     left_cones = center_points[left_cones]
-    ros_right_cones.poses = []
-    ros_left_cones.poses = []
+    ros_cones.landmarks = []
     
     for point in right_cones:
       point = np.append(point, 0)
-      ros_right_cones.poses.append(Pose(Point(*point), Quaternion(0,0,0,0)))
+      cone_now = Landmark()
+      cone_now.position = Point(*point)
+      cone_now.type     = 1                    # yellow cone has type 1
+      ros_cones.landmarks.append(cone_now)
 
     for point in left_cones:
       point = np.append(point, 0)
-      ros_left_cones.poses.append(Pose(Point(*point), Quaternion(0,0,0,0)))
+      cone_now = Landmark()
+      cone_now.position = Point(*point)
+      cone_now.type     = 0                   # blue left cone has type 0
+      ros_cones.landmarks.append(cone_now)
     
-  ros_right_cones.header.stamp = rospy.Time.now()
-  ros_left_cones.header.stamp = ros_right_cones.header.stamp
+  ros_cones.header.stamp = rospy.Time.now()
   
-  right_cones_pub.publish(ros_right_cones)
-  left_cones_pub.publish(ros_left_cones)
+  cones_pub.publish(ros_cones)
   r.sleep()
