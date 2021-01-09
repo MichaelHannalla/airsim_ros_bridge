@@ -231,3 +231,6 @@ catkin_install_python(PROGRAMS src/airsim_ros_bridge/delaunay_planner.py
 
 catkin_install_python(PROGRAMS src/airsim_ros_bridge/delaunay_planner_laps.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
+  
+catkin_install_python(PROGRAMS src/airsim_ros_bridge/camera_publisher.py
+  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
