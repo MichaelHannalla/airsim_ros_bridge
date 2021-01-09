@@ -7,6 +7,7 @@ from std_msgs.msg import Float64MultiArray
 from std_msgs.msg import MultiArrayLayout
 from std_msgs.msg import MultiArrayDimension
 
+import numpy as np
 
 # Initializing airsim client node and enabling API control
 client = airsim.CarClient()
@@ -17,8 +18,7 @@ car_controls.is_manual_gear = False
 
 # Initializing ROS node
 rospy.init_node("airsim_vehicle_mover")
-r = rospy.Rate(2.0)
-
+r = rospy.Rate(10)
 
 # Defining subscriber callback functions
 def throttle_callback(throttle_input):
@@ -33,7 +33,8 @@ def throttle_callback(throttle_input):
 def steering_angle_callback(steering_angle_input):
 	#client=airsim.CarClient()
 	try:
-		car_controls.steering =  float(steering_angle_input.data[0])
+		car_controls.steering =  -1 * float(steering_angle_input.data[0]) * 2.0
+		rospy.loginfo(car_controls.steering)
 		client.setCarControls(car_controls)
 		r.sleep()
 	except (RuntimeError, ValueError, BufferError, IOError, AssertionError, TypeError, IndexError):
