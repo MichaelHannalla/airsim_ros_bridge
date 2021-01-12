@@ -13,8 +13,8 @@ client.confirmConnection()
 
 #ros
 rospy.init_node('airsim_odometry_publisher_node')
-odom_pub = rospy.Publisher("airsim/KinematicOdometry", Odometry, queue_size=50)
-odom_local_pub = rospy.Publisher("airsim/KinematicOdometryLocal", Odometry, queue_size=50)
+odom_pub = rospy.Publisher("airsim/KinematicOdometry", Odometry, queue_size=1)
+odom_local_pub = rospy.Publisher("airsim/KinematicOdometryLocal", Odometry, queue_size=1)
 odom_broadcaster = tf.TransformBroadcaster()
 
 #inital values
@@ -25,7 +25,7 @@ vy = 0
 vth = 0
 current_time = rospy.Time.now()
 
-r = rospy.Rate(5.0)
+r = rospy.Rate(10.0)
 
 odom = Odometry()
 odom.header.frame_id = "odom"
@@ -57,6 +57,7 @@ while not rospy.is_shutdown():
     odom_eul  = tf.transformations.euler_from_quaternion(odom_quat)
     yaw = odom_eul[2]
 
+    '''
     odom_broadcaster.sendTransform(
 	(x, y, 0),
 	odom_quat,
@@ -64,7 +65,8 @@ while not rospy.is_shutdown():
 	"base_link",
 	"odom"
     )
-    
+    '''
+
     odom.header.stamp = current_time
     odom.pose.pose = Pose(Point(x, y, z_steering), Quaternion(*odom_quat))
     odom.twist.twist = Twist(Vector3(vx, vy, 0), Vector3(0, 0, vth))

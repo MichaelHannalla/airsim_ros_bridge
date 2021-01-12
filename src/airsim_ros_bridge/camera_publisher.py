@@ -30,11 +30,11 @@ while not rospy.is_shutdown():
 
     img1d = np.frombuffer(responses[0].image_data_uint8, dtype=np.uint8) #get numpy array
     img_rgb = img1d.reshape(responses[0].height, responses[0].width, 3)  #reshape array to 3 channel image array H X W X 3
-
+    img_bgr = cv2.cvtColor(img_rgb, cv2.COLOR_RGB2BGR)
     depth_map = responses[1].image_data_float
     depth_map = np.reshape(depth_map, (responses[1].height, responses[1].width))
 
-    ros_img = ros_numpy.msgify(Image, img_rgb, encoding="bgr8")
+    ros_img = ros_numpy.msgify(Image, img_bgr, encoding="rgb8")
     ros_img.header.stamp = rospy.Time.now()
     img_pub.publish(ros_img)
     r.sleep()

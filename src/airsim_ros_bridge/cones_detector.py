@@ -26,7 +26,7 @@ cones_pub = rospy.Publisher('airsim/Cones', LandmarkArray, queue_size=10)
 ros_cones = LandmarkArray()
 ros_cones.header.frame_id = "velodyne"
 
-r = rospy.Rate(10)
+r = rospy.Rate(5)
 
 # Defining the clustering function.
 def radius_nms_np(boxes,radius):
@@ -54,7 +54,7 @@ while not rospy.is_shutdown():
   point_data = np.asarray(airsim_lidar.point_cloud, np.float32)
 
   if len(point_data) >= 3:
-    point_data = point_data.reshape((int(point_data.shape[0]/5),5))
+    point_data = point_data.reshape((int(point_data.shape[0]/4),4))
 
     # Temporary solution of cone detection using lidar pointcloud height thresholding.
     point_data_x = point_data[:,0]

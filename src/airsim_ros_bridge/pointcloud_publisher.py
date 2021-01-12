@@ -45,7 +45,7 @@ try:
 		else:
 	
 		    #Reshaping of point data to (num_points, 3) 
-		    point_data = np.reshape(point_data, (int(point_data.shape[0]/5), 5))
+		    point_data = np.reshape(point_data, (int(point_data.shape[0]/4), 4))
 	
 		    point_prepared = np.zeros(len(point_data), dtype=[('x', 'f4'), ('y', 'f4'),('z', 'f4')])
 		    point_prepared['x'] = point_data[:,0]
