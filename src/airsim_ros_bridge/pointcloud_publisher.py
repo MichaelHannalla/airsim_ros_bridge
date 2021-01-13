@@ -44,42 +44,47 @@ try:
 
 		else:
 	
-		    #Reshaping of point data to (num_points, 3) 
-		    point_data = np.reshape(point_data, (int(point_data.shape[0]/4), 4))
+		    #Reshaping of point data to (num_points, 4)
+			try: 
+				point_data = np.reshape(point_data, (int(point_data.shape[0]/4), 4))
+		
+				point_prepared = np.zeros(len(point_data), dtype=[('x', 'f4'), ('y', 'f4'),('z', 'f4'), ('intensity', 'f4')])
+				point_prepared['x'] = point_data[:,0]
+				point_prepared['y'] = -1 * point_data[:,1]
+				point_prepared['z'] = -1 * point_data[:,2]
+				point_prepared['intensity'] = point_data[:,3]
+			except (ValueError, IndexError):
+				point_data = np.reshape(point_data, (int(point_data.shape[0]/5), 5))
+		
+				point_prepared = np.zeros(len(point_data), dtype=[('x', 'f4'), ('y', 'f4'),('z', 'f4')])
+				point_prepared['x'] = point_data[:,0]
+				point_prepared['y'] = -1 * point_data[:,1]
+				point_prepared['z'] = -1 * point_data[:,2]
 	
-		    point_prepared = np.zeros(len(point_data), dtype=[('x', 'f4'), ('y', 'f4'),('z', 'f4'), ('intensity', 'f4')])
-		    point_prepared['x'] = point_data[:,0]
-		    point_prepared['y'] = -1 * point_data[:,1]
-		    point_prepared['z'] = -1 * point_data[:,2]
-		    point_prepared['intensity'] = -1 * point_data[:,3]
-	
-		    #Visualization of point cloud output from AirSim API
-		    #pcd.points = o3d.utility.Vector3dVector(point_data) # xyz is a numpy array with shape (num_points,3)
-		    #o3d.visualization.draw_geometries([pcd])
 	 
-		    #Preparing IMU message
-		    ros_imu.angular_velocity.x = airsim_imu.angular_velocity.x_val
-		    ros_imu.angular_velocity.y = airsim_imu.angular_velocity.y_val
-		    ros_imu.angular_velocity.z = airsim_imu.angular_velocity.z_val
-		    ros_imu.linear_acceleration.x = airsim_imu.linear_acceleration.x_val
-		    ros_imu.linear_acceleration.y = airsim_imu.linear_acceleration.y_val
-		    ros_imu.linear_acceleration.z = airsim_imu.linear_acceleration.z_val
-		    ros_imu.orientation.w = airsim_imu.orientation.w_val
-		    ros_imu.orientation.x = airsim_imu.orientation.x_val
-		    ros_imu.orientation.y = airsim_imu.orientation.y_val
-		    ros_imu.orientation.z = airsim_imu.orientation.z_val
+			#Preparing IMU message
+			ros_imu.angular_velocity.x = airsim_imu.angular_velocity.x_val
+			ros_imu.angular_velocity.y = airsim_imu.angular_velocity.y_val
+			ros_imu.angular_velocity.z = airsim_imu.angular_velocity.z_val
+			ros_imu.linear_acceleration.x = airsim_imu.linear_acceleration.x_val
+			ros_imu.linear_acceleration.y = airsim_imu.linear_acceleration.y_val
+			ros_imu.linear_acceleration.z = airsim_imu.linear_acceleration.z_val
+			ros_imu.orientation.w = airsim_imu.orientation.w_val
+			ros_imu.orientation.x = airsim_imu.orientation.x_val
+			ros_imu.orientation.y = airsim_imu.orientation.y_val
+			ros_imu.orientation.z = airsim_imu.orientation.z_val
 	
-		    #Preparing LiDAR message
-		    ros_lidar = ros_numpy.point_cloud2.array_to_pointcloud2(point_prepared)
-	
-		    #Publishing the ROS messages with stamps and frame identities
-		    ros_imu.header.frame_id = "odom"
-		    ros_imu.header.stamp = rospy.Time.now() 
-		    ros_lidar.header.frame_id = "velodyne"
-		    ros_lidar.header.stamp = rospy.Time.now()
-	
-		    imu_pub.publish(ros_imu)
-		    lidar_pub.publish(ros_lidar)
+			#Preparing LiDAR message
+			ros_lidar = ros_numpy.point_cloud2.array_to_pointcloud2(point_prepared)
+
+			#Publishing the ROS messages with stamps and frame identities
+			ros_imu.header.frame_id = "odom"
+			ros_imu.header.stamp = rospy.Time.now() 
+			ros_lidar.header.frame_id = "velodyne"
+			ros_lidar.header.stamp = rospy.Time.now()
+
+			imu_pub.publish(ros_imu)
+			lidar_pub.publish(ros_lidar)
 			
 		r.sleep()
 

@@ -54,7 +54,11 @@ while not rospy.is_shutdown():
   point_data = np.asarray(airsim_lidar.point_cloud, np.float32)
 
   if len(point_data) >= 3:
-    point_data = point_data.reshape((int(point_data.shape[0]/4),4))
+    try: 
+      point_data = np.reshape(point_data, (int(point_data.shape[0]/4), 4))
+
+    except (ValueError, IndexError):
+      point_data = np.reshape(point_data, (int(point_data.shape[0]/5), 5))
 
     # Temporary solution of cone detection using lidar pointcloud height thresholding.
     point_data_x = point_data[:,0]

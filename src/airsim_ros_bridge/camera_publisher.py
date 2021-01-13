@@ -26,7 +26,7 @@ r = rospy.Rate(50)
 
 while not rospy.is_shutdown():
     responses = client.simGetImages([ airsim.ImageRequest("0", airsim.ImageType.Scene, False, False), 
-        airsim.ImageRequest("0", airsim.ImageType.DepthPlanner, True, False)]) 
+        airsim.ImageRequest("front_center", airsim.ImageType.DepthPlanner, True, False)]) 
 
     img1d = np.frombuffer(responses[0].image_data_uint8, dtype=np.uint8) #get numpy array
     img_rgb = img1d.reshape(responses[0].height, responses[0].width, 3)  #reshape array to 3 channel image array H X W X 3
