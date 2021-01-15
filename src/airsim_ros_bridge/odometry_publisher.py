@@ -5,6 +5,8 @@ import rospy
 import tf
 from nav_msgs.msg import Odometry
 from geometry_msgs.msg import Point, Pose, Quaternion, Twist, Vector3
+from rosgraph_msgs.msg import Clock
+from std_msgs.msg import Float32
 import numpy as np
 
 #airsim
@@ -14,7 +16,12 @@ client.confirmConnection()
 #ros
 rospy.init_node('airsim_odometry_publisher_node')
 odom_pub = rospy.Publisher("airsim/KinematicOdometry", Odometry, queue_size=1)
+twist_pub = rospy.Publisher("airsim/GroundTruthTwist", Twist, queue_size=1)
 odom_local_pub = rospy.Publisher("airsim/KinematicOdometryLocal", Odometry, queue_size=1)
+v_rr_pub = rospy.Publisher("airsim/RightRearWheelVelocity", Float32, queue_size=1)
+v_rf_pub = rospy.Publisher("airsim/RightFrontWheelVelocity", Float32, queue_size=1)
+v_lr_pub = rospy.Publisher("airsim/LeftRearWheelVelocity", Float32, queue_size=1)
+v_lf_pub = rospy.Publisher("airsim/LeftFrontWheelVelocity", Float32, queue_size=1)
 odom_broadcaster = tf.TransformBroadcaster()
 
 #inital values
@@ -25,7 +32,9 @@ vy = 0
 vth = 0
 current_time = rospy.Time.now()
 
-r = rospy.Rate(10.0)
+v_rr, v_rf, v_lr, v_lf = Float32(), Float32(), Float32(), Float32() 
+
+r = rospy.Rate(60.0)
 
 odom = Odometry()
 odom.header.frame_id = "odom"
@@ -85,4 +94,5 @@ while not rospy.is_shutdown():
     odom_local.twist.twist.angular.z = vth
 
     odom_local_pub.publish(odom_local)
+    twist_pub.publish(odom_local.twist.twist)
     r.sleep()

@@ -22,7 +22,7 @@ client.confirmConnection()
 
 #Initializing ros node and publishers. 
 rospy.init_node('airsim_cones_detector_node')
-cones_pub = rospy.Publisher('airsim/Cones', LandmarkArray, queue_size=10) 
+cones_pub = rospy.Publisher('airsim/Cones', LandmarkArray, queue_size=1) 
 ros_cones = LandmarkArray()
 ros_cones.header.frame_id = "velodyne"
 

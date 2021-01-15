@@ -11,6 +11,7 @@ find_package(catkin REQUIRED COMPONENTS
   message_generation
   roscpp
   rospy
+  rosgraph_msgs
 )
 
 ## System dependencies are found with CMake's conventions
@@ -205,6 +206,9 @@ include_directories(
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
 
+catkin_install_python(PROGRAMS src/airsim_ros_bridge/clock_publisher.py
+  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
+ 
 catkin_install_python(PROGRAMS src/airsim_ros_bridge/cones_detector.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
 
@@ -233,4 +237,7 @@ catkin_install_python(PROGRAMS src/airsim_ros_bridge/delaunay_planner_laps.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
   
 catkin_install_python(PROGRAMS src/airsim_ros_bridge/camera_publisher.py
+  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
+  
+catkin_install_python(PROGRAMS src/airsim_ros_bridge/imu_publisher.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
