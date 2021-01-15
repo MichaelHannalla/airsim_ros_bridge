@@ -22,6 +22,7 @@ v_rr_pub = rospy.Publisher("airsim/RightRearWheelVelocity", Float32, queue_size=
 v_rf_pub = rospy.Publisher("airsim/RightFrontWheelVelocity", Float32, queue_size=1)
 v_lr_pub = rospy.Publisher("airsim/LeftRearWheelVelocity", Float32, queue_size=1)
 v_lf_pub = rospy.Publisher("airsim/LeftFrontWheelVelocity", Float32, queue_size=1)
+steering_angle_pub = rospy.Publisher("airsim/SteeringAngle", Float32, queue_size=1)
 odom_broadcaster = tf.TransformBroadcaster()
 
 #inital values
@@ -55,7 +56,8 @@ while not rospy.is_shutdown():
     x = car_state.kinematics_estimated.position.x_val
     y = -1 * car_state.kinematics_estimated.position.y_val
     current_car_controls = client.getCarControls()
-    z_steering = current_car_controls.steering
+    steering_angle = current_car_controls.steering
+    steering_angle_pub.publish(Float32(steering_angle))
 
 
     wo = car_state.kinematics_estimated.orientation.w_val
@@ -82,7 +84,7 @@ while not rospy.is_shutdown():
     '''
 
     odom.header.stamp = current_time
-    odom.pose.pose = Pose(Point(x, y, z_steering), Quaternion(*odom_quat))
+    odom.pose.pose = Pose(Point(x, y, 0), Quaternion(*odom_quat))
     odom.twist.twist = Twist(Vector3(vx, vy, 0), Vector3(0, 0, vth))
     odom_pub.publish(odom)
 

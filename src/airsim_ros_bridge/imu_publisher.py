@@ -24,14 +24,14 @@ try:
 		#Preparing IMU message
 		ros_imu.angular_velocity.x = airsim_imu.angular_velocity.x_val
 		ros_imu.angular_velocity.y = airsim_imu.angular_velocity.y_val
-		ros_imu.angular_velocity.z = airsim_imu.angular_velocity.z_val
+		ros_imu.angular_velocity.z = -1 * airsim_imu.angular_velocity.z_val
 		ros_imu.linear_acceleration.x = airsim_imu.linear_acceleration.x_val
-		ros_imu.linear_acceleration.y = airsim_imu.linear_acceleration.y_val
-		ros_imu.linear_acceleration.z = airsim_imu.linear_acceleration.z_val
+		ros_imu.linear_acceleration.y = -1 * airsim_imu.linear_acceleration.y_val
+		ros_imu.linear_acceleration.z = -1 * airsim_imu.linear_acceleration.z_val
 		ros_imu.orientation.w = airsim_imu.orientation.w_val
 		ros_imu.orientation.x = airsim_imu.orientation.x_val
 		ros_imu.orientation.y = airsim_imu.orientation.y_val
-		ros_imu.orientation.z = airsim_imu.orientation.z_val
+		ros_imu.orientation.z = -1 * airsim_imu.orientation.z_val
 		
 		#Publishing the ROS messages with stamps and frame identities
 		ros_imu.header.frame_id = "imu_link"

@@ -20,7 +20,7 @@ try:
 	while not rospy.is_shutdown():
 		clock = rospy.Time.from_sec(client.getCarState().timestamp / 1e9)
 		clock_pub.publish(clock)
-		time.sleep(1/1000)
+		time.sleep(1/200)
 		
 except KeyboardInterrupt:
 	print("Exited")
