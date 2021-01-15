@@ -47,11 +47,16 @@ odom_local.child_frame_id = "base_link"
 while not rospy.is_shutdown():
     current_time = rospy.Time.now()
     car_state = client.getCarState()
+    v_rr_pub.publish(Float32(car_state.wheel_br_vel))
+    v_rf_pub.publish(Float32(car_state.wheel_fr_vel))
+    v_lr_pub.publish(Float32(car_state.wheel_bl_vel))
+    v_lf_pub.publish(Float32(car_state.wheel_fl_vel))
 
     x = car_state.kinematics_estimated.position.x_val
     y = -1 * car_state.kinematics_estimated.position.y_val
     current_car_controls = client.getCarControls()
     z_steering = current_car_controls.steering
+
 
     wo = car_state.kinematics_estimated.orientation.w_val
     xo = car_state.kinematics_estimated.orientation.x_val

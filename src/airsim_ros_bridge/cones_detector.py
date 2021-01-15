@@ -50,8 +50,10 @@ def radius_nms_np(boxes,radius):
 while not rospy.is_shutdown():
   # Getting lidar data.
   num_lidar_channels = 64
+  
   airsim_lidar = client.getLidarData(lidar_name="Lidar", vehicle_name = "")
-  point_data = np.asarray(airsim_lidar.point_cloud, np.float32)
+  point_data = np.array(airsim_lidar.point_cloud, dtype=np.dtype('f4'))
+
 
   if len(point_data) >= 3:
     try: 
