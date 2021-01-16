@@ -21,6 +21,8 @@ rospy.init_node("airsim_gps_node")
 pos_pub = rospy.Publisher('airsim/gps/fix', NavSatFix, queue_size=10)
 vel_pub = rospy.Publisher('airsim/gps/velocity', Vector3Stamped, queue_size=10)
 
+r = rospy.Rate(10)
+
 while not rospy.is_shutdown():
 	airsim_gps = client.getGpsData(gps_name = "Gps", vehicle_name = "")
 
@@ -37,5 +39,7 @@ while not rospy.is_shutdown():
 
 	pos_pub.publish(ros_gps)
 	vel_pub.publish(ros_gps_vel)
+
+	r.sleep()
 
 
