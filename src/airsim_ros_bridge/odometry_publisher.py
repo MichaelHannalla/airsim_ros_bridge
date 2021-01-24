@@ -98,6 +98,7 @@ while not rospy.is_shutdown():
 
     odom_local.pose.pose.position.x = x
     odom_local.pose.pose.position.y = y
+    odom_local.pose.pose.orientation = Quaternion(*odom_quat)
     odom_local.twist.twist.linear.x  = vel_local[0, 0]
     odom_local.twist.twist.linear.y  = vel_local[1, 0]
     odom_local.twist.twist.angular.z = vth
