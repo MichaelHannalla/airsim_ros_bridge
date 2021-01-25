@@ -26,7 +26,7 @@ r = rospy.Rate(10)
 while not rospy.is_shutdown():
 	airsim_gps = client.getGpsData(gps_name = "Gps", vehicle_name = "")
 
-	ros_gps.altitude = airsim_gps.gnss.geo_point.altitude
+	ros_gps.altitude = -1*airsim_gps.gnss.geo_point.altitude
 	ros_gps.longitude = airsim_gps.gnss.geo_point.longitude 
 	ros_gps.latitude = airsim_gps.gnss.geo_point.latitude
 	
