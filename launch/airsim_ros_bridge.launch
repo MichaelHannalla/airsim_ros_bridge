@@ -9,6 +9,7 @@
 	
 	<node name="clock_publisher" pkg="airsim_ros_bridge" type="clock_publisher.py" output="screen"/>
 	<node name="gps_publisher" pkg="airsim_ros_bridge" type="gps_publisher.py" output="screen"/>
+	<node name="magnetometer_publisher" pkg="airsim_ros_bridge" type="magnetometer_publisher.py" output="screen"/>
 	<node name="pointcloud_publisher" pkg="airsim_ros_bridge" type="pointcloud_publisher.py" output="screen"/>
 	<node name="odometry_publisher" pkg="airsim_ros_bridge" type="odometry_publisher.py" output="screen"/>
 	<!-- <node name="delaunay_planner" pkg="airsim_ros_bridge" type="delaunay_planner.py" output="screen"/> -->
