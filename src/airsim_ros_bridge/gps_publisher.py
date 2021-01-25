@@ -34,8 +34,8 @@ while not rospy.is_shutdown():
 	ros_gps_vel.header.stamp = rospy.Time.from_sec(airsim_gps.time_stamp / 1e9)
 	
 	ros_gps_vel.vector.x = airsim_gps.gnss.velocity.x_val
-	ros_gps_vel.vector.y = airsim_gps.gnss.velocity.y_val
-	ros_gps_vel.vector.z = airsim_gps.gnss.velocity.z_val
+	ros_gps_vel.vector.y = -1*airsim_gps.gnss.velocity.y_val
+	ros_gps_vel.vector.z = -1*airsim_gps.gnss.velocity.z_val
 
 	pos_pub.publish(ros_gps)
 	vel_pub.publish(ros_gps_vel)
