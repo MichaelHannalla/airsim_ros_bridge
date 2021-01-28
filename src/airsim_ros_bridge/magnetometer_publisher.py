@@ -22,12 +22,11 @@ try:
 	while not rospy.is_shutdown():
 		
 		airsim_mag = client.getMagnetometerData(magnetometer_name = "", vehicle_name = "")
-
 		# Preparing Magnetometer message
 		ros_mag.header.stamp = rospy.Time.now()
 		ros_mag.magnetic_field.x = airsim_mag.magnetic_field_body.x_val
-		ros_mag.magnetic_field.y = -1.0 * airsim_mag.magnetic_field_body.y_val
-		ros_mag.magnetic_field.z = -1.0 * airsim_mag.magnetic_field_body.z_val
+		ros_mag.magnetic_field.y = airsim_mag.magnetic_field_body.y_val
+		ros_mag.magnetic_field.z = airsim_mag.magnetic_field_body.z_val
 
 		magnet_pub.publish(ros_mag)
 

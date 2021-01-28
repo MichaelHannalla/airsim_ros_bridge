@@ -56,7 +56,7 @@ while not rospy.is_shutdown():
     x = car_state.kinematics_estimated.position.x_val
     y = -1 * car_state.kinematics_estimated.position.y_val
     current_car_controls = client.getCarControls()
-    steering_angle = current_car_controls.steering
+    steering_angle = -1*current_car_controls.steering
     steering_angle_pub.publish(Float32(steering_angle))
 
 
