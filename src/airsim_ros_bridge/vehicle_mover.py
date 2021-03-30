@@ -1,6 +1,6 @@
 #! /usr/bin/env python
 
-import airsim 
+import airsim
 import rospy
 from std_msgs.msg import Float32
 from std_msgs.msg import Float64MultiArray
@@ -10,6 +10,10 @@ from std_msgs.msg import MultiArrayDimension
 import numpy as np
 
 # Initializing airsim client node and enabling API control
+global global_throttle
+global client
+global car_controls
+global_throttle = 0
 client = airsim.CarClient()
 client.confirmConnection()
 client.enableApiControl(True)
@@ -22,24 +26,23 @@ r = rospy.Rate(10)
 
 # Defining subscriber callback functions
 def throttle_callback(throttle_input):
+	global client
+	global global_throttle
 	try:
-		car_controls.throttle = float(throttle_input.data[0])
-		client.setCarControls(car_controls)
-		r.sleep()
+		global_throttle = float(throttle_input.data[0])
 	except (RuntimeError, ValueError, BufferError, IOError, AssertionError, TypeError, IndexError):
 		pass
-		#print("Catching exceptions")
 
 def steering_angle_callback(steering_angle_input):
-	#client=airsim.CarClient()
+	global client
+	global global_throttle
+	global car_controls
 	try:
+		car_controls.throttle = global_throttle
 		car_controls.steering =  -1 * float(steering_angle_input.data[0]) * 2.0
-		rospy.loginfo(car_controls.steering)
 		client.setCarControls(car_controls)
-		r.sleep()
 	except (RuntimeError, ValueError, BufferError, IOError, AssertionError, TypeError, IndexError):
 		pass
-		#print("Catching exceptions")
 
 rospy.Subscriber('controls/AI2VCU_Steer', Float64MultiArray, queue_size= 1, callback= steering_angle_callback)
 rospy.Subscriber('controls/AI2VCU_Drive_F', Float64MultiArray, queue_size= 1, callback= throttle_callback)
