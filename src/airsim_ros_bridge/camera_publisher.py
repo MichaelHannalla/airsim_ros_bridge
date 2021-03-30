@@ -40,7 +40,7 @@ ros_img.header.frame_id = "camera_link"
 ros_img_depth.header.frame_id = "camera_link"
 ros_img_r.header.frame_id = "right_stereo_link"
 ros_img_l.header.frame_id = "left_stereo_link"
-r = rospy.Rate(20)
+r = rospy.Rate(30)
 
 while not rospy.is_shutdown():
     responses = client.simGetImages([ airsim.ImageRequest("front_center", airsim.ImageType.Scene, False, False), 

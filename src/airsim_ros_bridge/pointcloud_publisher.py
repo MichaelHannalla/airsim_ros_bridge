@@ -44,6 +44,7 @@ try:
 				point_prepared['y'] = -1 * point_data[:,1]
 				point_prepared['z'] = -1 * point_data[:,2]
 				point_prepared['intensity'] = point_data[:,3]
+
 			except (ValueError, IndexError):
 				point_data = np.reshape(point_data, (int(point_data.shape[0]/5), 5))
 		
@@ -51,7 +52,7 @@ try:
 				point_prepared['x'] = point_data[:,0]
 				point_prepared['y'] = -1 * point_data[:,1]
 				point_prepared['z'] = -1 * point_data[:,2]
-		
+				
 			#Preparing LiDAR message
 			ros_lidar = ros_numpy.point_cloud2.array_to_pointcloud2(point_prepared)
 
