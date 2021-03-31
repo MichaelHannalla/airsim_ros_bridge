@@ -99,7 +99,7 @@ def main():
       if len(lms.landmarks) > 0:
         lms.header.stamp = rospy.Time.now()
         lms.header.frame_id = "base_link"
-        print("publishing")
+        #print("publishing")
         cones_pub.publish(lms)
 
       if False:
