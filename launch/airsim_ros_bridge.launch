@@ -8,15 +8,16 @@
 	<param name="/use_sim_time" value="true"/>
 	
 	<node name="clock_publisher" pkg="airsim_ros_bridge" type="clock_publisher.py" output="screen"/>
-	<node name="gps_publisher" pkg="airsim_ros_bridge" type="gps_publisher.py" output="screen"/>
-	<node name="magnetometer_publisher" pkg="airsim_ros_bridge" type="magnetometer_publisher.py" output="screen"/>
-	<node name="pointcloud_publisher" pkg="airsim_ros_bridge" type="pointcloud_publisher.py" output="screen"/>
+	<!--<node name="gps_publisher" pkg="airsim_ros_bridge" type="gps_publisher.py" output="screen"/>-->
+	<!--<node name="magnetometer_publisher" pkg="airsim_ros_bridge" type="magnetometer_publisher.py" output="screen"/>-->
+	<!--<node name="pointcloud_publisher" pkg="airsim_ros_bridge" type="pointcloud_publisher.py" output="screen"/>-->
 	<node name="odometry_publisher" pkg="airsim_ros_bridge" type="odometry_publisher.py" output="screen"/>
 	<!-- <node name="delaunay_planner" pkg="airsim_ros_bridge" type="delaunay_planner.py" output="screen"/> -->
 	<!-- <node name="delaunay_planner_laps" pkg="airsim_ros_bridge" type="delaunay_planner_laps.py" output="screen"/> -->
 	<!-- <node name="cones_detector" pkg="airsim_ros_bridge" type="cones_detector.py" output="screen"/> -->
-	<node name="cones_detector" pkg="airsim_ros_bridge" type="gt_cones.py" output="screen"/>
-	<param name="utils_path" value="$(find airsim_ros_bridge)/utils/"/>
+	<!--<node name="cones_detector" pkg="airsim_ros_bridge" type="gt_cones.py" output="screen"/>-->
+	<node name="cones_detector" pkg="airsim_ros_bridge" type="gt_cones_global.py" output="screen"/>
+	<param name="utils_path" value="$(find airsim_ros_bridge)/utils/skidpad/"/>
 	
 	<!-- <node name="tf_to_odom_publisher" pkg="airsim_ros_bridge" type="tf_to_odom_publisher.py" output="screen"/> -->
 	<!-- <node name="vehicle_mover" pkg="airsim_ros_bridge" type="vehicle_mover.py" output="screen"/> -->

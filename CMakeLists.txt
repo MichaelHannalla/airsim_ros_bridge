@@ -244,3 +244,8 @@ catkin_install_python(PROGRAMS src/airsim_ros_bridge/imu_publisher.py
   
 catkin_install_python(PROGRAMS src/airsim_ros_bridge/gt_cones.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
+
+catkin_install_python(PROGRAMS src/airsim_ros_bridge/gt_cones_global.py
+  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
+
+  
