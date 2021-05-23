@@ -13,6 +13,7 @@ import numpy as np
 global global_throttle
 global client
 global car_controls
+global_steering = 0.0
 global_throttle = 0
 client = airsim.CarClient()
 client.confirmConnection()
@@ -35,17 +36,27 @@ def throttle_callback(throttle_input):
 
 def steering_angle_callback(steering_angle_input):
 	global client
+	global global_steering
+	try:
+		global_steering =  -1 * float(steering_angle_input.data[0]) * 2.0
+	except (RuntimeError, ValueError, BufferError, IOError, AssertionError, TypeError, IndexError):
+		pass
+def braking_callback(brake_input):
+	global client
 	global global_throttle
+	global global_steering
 	global car_controls
 	try:
 		car_controls.throttle = global_throttle
-		car_controls.steering =  -1 * float(steering_angle_input.data[0]) * 2.0
+		car_controls.steering = global_steering
+		car_controls.brake = float(brake_input.data[0])
 		client.setCarControls(car_controls)
 	except (RuntimeError, ValueError, BufferError, IOError, AssertionError, TypeError, IndexError):
 		pass
 
 rospy.Subscriber('controls/AI2VCU_Steer', Float64MultiArray, queue_size= 1, callback= steering_angle_callback)
 rospy.Subscriber('controls/AI2VCU_Drive_F', Float64MultiArray, queue_size= 1, callback= throttle_callback)
+rospy.Subscriber('controls/AI2VCU_Brake', Float64MultiArray, queue_size= 1, callback= braking_callback)
 
 while not rospy.is_shutdown():
 	try:
